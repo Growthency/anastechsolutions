@@ -22,8 +22,8 @@ const contactCards = [
   {
     icon: Mail,
     label: "Email",
-    value: "info@anastechsolutions.com",
-    href: "mailto:info@anastechsolutions.com",
+    value: "infoabubakar786@gmail.com",
+    href: "mailto:infoabubakar786@gmail.com",
     color: "#ED1C24",
     desc: "We reply within 24 hours",
   },
