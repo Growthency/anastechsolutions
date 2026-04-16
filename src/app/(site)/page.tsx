@@ -11,7 +11,7 @@ import { CtaBand } from "@/components/sections/CtaBand";
 import { SectionDivider } from "@/components/effects/SectionDivider";
 
 export const metadata: Metadata = {
-  title: "AnasTech Solutions — Digital Agency Bangladesh",
+  title: { absolute: "AnasTech Solutions — Digital Agency Bangladesh" },
   description:
     "Enterprise websites, software, mobile apps, bulk SMS & call center solutions. Trusted by 80+ businesses in 10+ countries. Chat with us on WhatsApp.",
 };

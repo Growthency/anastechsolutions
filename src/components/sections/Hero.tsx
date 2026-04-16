@@ -98,7 +98,7 @@ export function Hero() {
               We Build{" "}
               <span className="block">
                 <TypeWriter
-                  words={["Websites", "Software", "Mobile Apps", "Business Solutions"]}
+                  words={["Websites", "Software", "Solutions", "Mobile Apps"]}
                   className="gradient-text"
                 />
               </span>
