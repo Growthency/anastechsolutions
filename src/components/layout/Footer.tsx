@@ -13,14 +13,11 @@ export function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-8">
           {/* Brand */}
           <div className="lg:col-span-1">
-            <Link href="/" className="flex items-center gap-2 mb-4">
-              <svg width="32" height="32" viewBox="0 0 40 40" fill="none">
+            <Link href="/" className="flex items-center gap-0 mb-4" aria-label="AnasTech Solutions Home">
+              <svg width="36" height="36" viewBox="0 0 40 40" fill="none">
                 <polygon points="20,2 38,34 2,34" fill="#ED1C24" opacity="0.9" />
                 <polygon points="20,10 35,36 5,36" fill="#0F75BC" opacity="0.85" />
               </svg>
-              <span className="font-display font-700 text-xl text-white">
-                Anas<span className="text-brand-red">Tech</span>
-              </span>
             </Link>
             <p className="text-white/60 text-sm leading-relaxed mb-6">
               Building digital futures for businesses across Bangladesh and beyond. Enterprise websites, software, mobile apps, and more.

@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X, ChevronDown, MessageCircle } from "lucide-react";
+import { Menu, X, MessageCircle } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { WA_LINKS } from "@/lib/utils";
 
@@ -17,20 +17,25 @@ const navLinks = [
   { label: "Contact", href: "/contact" },
 ];
 
+const LogoMark = ({ size = 32 }: { size?: number }) => (
+  <svg width={size} height={size} viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <polygon points="20,2 38,34 2,34" fill="#ED1C24" opacity="0.9" />
+    <polygon points="20,10 35,36 5,36" fill="#0F75BC" opacity="0.85" />
+  </svg>
+);
+
 export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const pathname = usePathname();
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 20);
+    const onScroll = () => setScrolled(window.scrollY > 40);
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  useEffect(() => {
-    setMobileOpen(false);
-  }, [pathname]);
+  useEffect(() => { setMobileOpen(false); }, [pathname]);
 
   useEffect(() => {
     document.body.style.overflow = mobileOpen ? "hidden" : "";
@@ -41,23 +46,27 @@ export function Navbar() {
     <>
       <header
         className={cn(
-          "fixed top-0 left-0 right-0 z-40 transition-all duration-300",
+          "fixed top-0 left-0 right-0 z-40 transition-all duration-500 ease-in-out",
           scrolled
-            ? "glass border-b border-border/50 shadow-sm"
+            ? "bg-white/90 backdrop-blur-xl shadow-[0_2px_24px_rgba(0,0,0,0.07)]"
             : "bg-transparent"
         )}
       >
-        <nav className="max-w-7xl mx-auto px-6 lg:px-8 h-16 flex items-center justify-between">
+        <nav
+          className={cn(
+            "max-w-7xl mx-auto px-6 lg:px-8 flex items-center justify-between transition-all duration-500 ease-in-out",
+            scrolled ? "h-14" : "h-20"
+          )}
+        >
           {/* Logo */}
-          <Link href="/" className="flex items-center gap-2 flex-shrink-0" aria-label="AnasTech Solutions Home">
-            <div className="flex items-center gap-2">
-              {/* Logo mark */}
-              <svg width="32" height="32" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <polygon points="20,2 38,34 2,34" fill="#ED1C24" opacity="0.9" />
-                <polygon points="20,10 35,36 5,36" fill="#0F75BC" opacity="0.85" />
-              </svg>
-              <span className="font-display font-700 text-xl text-ink tracking-tight">
+          <Link href="/" className="flex items-center gap-2.5 flex-shrink-0" aria-label="AnasTech Solutions Home">
+            <LogoMark size={scrolled ? 28 : 34} />
+            <div className="flex flex-col leading-none">
+              <span className="font-display font-bold text-[17px] text-ink tracking-tight leading-none">
                 Anas<span className="text-brand-red">Tech</span>
+              </span>
+              <span className="text-[9px] font-semibold text-ink-muted tracking-[0.22em] uppercase leading-none mt-[3px]">
+                Solutions
               </span>
             </div>
           </Link>
@@ -117,15 +126,17 @@ export function Navbar() {
             className="fixed inset-0 z-50 bg-paper flex flex-col"
           >
             {/* Header */}
-            <div className="flex items-center justify-between px-6 h-16 border-b border-border">
-              <Link href="/" className="flex items-center gap-2" onClick={() => setMobileOpen(false)}>
-                <svg width="28" height="28" viewBox="0 0 40 40" fill="none">
-                  <polygon points="20,2 38,34 2,34" fill="#ED1C24" opacity="0.9" />
-                  <polygon points="20,10 35,36 5,36" fill="#0F75BC" opacity="0.85" />
-                </svg>
-                <span className="font-display font-700 text-xl text-ink">
-                  Anas<span className="text-brand-red">Tech</span>
-                </span>
+            <div className="flex items-center justify-between px-6 h-16 border-b border-border/60">
+              <Link href="/" className="flex items-center gap-2.5" onClick={() => setMobileOpen(false)}>
+                <LogoMark size={28} />
+                <div className="flex flex-col leading-none">
+                  <span className="font-display font-bold text-[17px] text-ink tracking-tight leading-none">
+                    Anas<span className="text-brand-red">Tech</span>
+                  </span>
+                  <span className="text-[9px] font-semibold text-ink-muted tracking-[0.22em] uppercase leading-none mt-[3px]">
+                    Solutions
+                  </span>
+                </div>
               </Link>
               <button
                 onClick={() => setMobileOpen(false)}
@@ -143,7 +154,7 @@ export function Navbar() {
               animate="visible"
               variants={{ visible: { transition: { staggerChildren: 0.05 } } }}
             >
-              {navLinks.map((link, i) => (
+              {navLinks.map((link) => (
                 <motion.li
                   key={link.href}
                   variants={{

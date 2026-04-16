@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Space_Grotesk, Inter, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 
@@ -61,6 +61,18 @@ export const metadata: Metadata = {
     follow: true,
     googleBot: { index: true, follow: true },
   },
+  manifest: "/manifest.webmanifest",
+  appleWebApp: {
+    capable: true,
+    statusBarStyle: "default",
+    title: "AnasTech Solutions",
+  },
+};
+
+export const viewport: Viewport = {
+  themeColor: "#0F75BC",
+  width: "device-width",
+  initialScale: 1,
 };
 
 export default function RootLayout({
