@@ -28,7 +28,6 @@ export default function HomePage() {
       <ProductsShowcase />
       <SectionDivider variant="blob" color="#F7F8FB" />
       <HowWeWork />
-      <SectionDivider variant="arrow" color="white" flip />
       <Stats />
       <SectionDivider variant="wave" color="#FFFFFF" flip />
       <Testimonials />
