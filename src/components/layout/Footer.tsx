@@ -9,7 +9,7 @@ export function Footer() {
 
   return (
     <footer className="bg-ink text-white">
-      <div className="max-w-7xl mx-auto px-6 lg:px-8 py-16 lg:py-20">
+      <div className="max-w-7xl mx-auto px-6 lg:px-8 py-12 lg:py-14">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-8">
           {/* Brand */}
           <div className="lg:col-span-1">
@@ -138,12 +138,20 @@ export function Footer() {
         </div>
 
         {/* Bottom bar */}
-        <div className="mt-16 pt-8 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4">
+        <div className="mt-10 pt-6 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4">
           <p className="text-white/40 text-sm">
             &copy; {year} AnasTech Solutions. All rights reserved.
           </p>
           <p className="text-white/40 text-sm">
-            Powered by <span className="text-brand-blue font-medium">AnasTech</span>
+            Made by{" "}
+            <a
+              href="https://growthency.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-brand-blue font-medium hover:text-brand-blue-light transition-colors"
+            >
+              Growthency
+            </a>
           </p>
         </div>
       </div>
