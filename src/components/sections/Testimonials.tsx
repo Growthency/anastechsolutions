@@ -51,8 +51,7 @@ export function Testimonials() {
 function TestimonialCard({ testimonial }: { testimonial: typeof testimonials[0] }) {
   return (
     <div
-      className="bg-paper-2 border border-border rounded-2xl p-6 hover:border-brand-blue/30 hover:shadow-card transition-all duration-300"
-      style={{ transform: `rotate(${testimonial.rotation}deg)`, transformOrigin: "center" }}
+      className="bg-paper-2 border border-border rounded-2xl p-6 hover:border-brand-blue/30 hover:shadow-card hover:-translate-y-1 transition-all duration-300"
     >
       {/* Quote icon */}
       <svg
