@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { ArrowRight, Heart, BarChart3, Stethoscope, Zap, CheckCircle2 } from "lucide-react";
+import { ArrowRight, Heart, BarChart3, Stethoscope, Zap, CheckCircle2, BookMarked, ExternalLink } from "lucide-react";
 import { ScrollReveal } from "@/components/effects/ScrollReveal";
 import { GradientBlob } from "@/components/effects/GradientBlob";
 import { SectionDivider } from "@/components/effects/SectionDivider";
@@ -9,11 +9,11 @@ import { products } from "@/lib/data/products";
 
 export const metadata: Metadata = {
   title: "Our Products",
-  description: "Khdimatul Ummah, eBusiness, Hospital Care, and Bulk SMS Platform — enterprise software products by AnasTech Solutions.",
+  description: "Muhius Sunnah, Khdimatul Ummah, eBusiness, Hospital Care, and Bulk SMS Platform — enterprise software products by AnasTech Solutions.",
 };
 
 const iconMap: Record<string, React.ComponentType<{ className?: string; style?: React.CSSProperties }>> = {
-  Heart, BarChart3, Stethoscope, Zap,
+  BookMarked, Heart, BarChart3, Stethoscope, Zap,
 };
 
 export default function ProductsPage() {
@@ -70,9 +70,17 @@ export default function ProductsPage() {
 
                   {/* Content */}
                   <div className={!isEven ? "lg:col-start-1 lg:row-start-1" : ""}>
-                    <p className="text-sm font-semibold uppercase tracking-widest mb-2" style={{ color: product.color }}>
-                      AnasTech Product
-                    </p>
+                    <div className="flex items-center gap-2 mb-2">
+                      <p className="text-sm font-semibold uppercase tracking-widest" style={{ color: product.color }}>
+                        AnasTech Product
+                      </p>
+                      {product.liveUrl && (
+                        <span className="inline-flex items-center gap-1 text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full" style={{ backgroundColor: product.color + "15", color: product.color, border: `1px solid ${product.color}30` }}>
+                          <span className="w-1.5 h-1.5 rounded-full animate-pulse" style={{ backgroundColor: product.color }} />
+                          Live
+                        </span>
+                      )}
+                    </div>
                     <h2 className="font-display text-3xl lg:text-4xl font-bold text-ink mb-3">{product.title}</h2>
                     <p className="text-ink-soft leading-relaxed mb-6">{product.description}</p>
 
@@ -96,15 +104,27 @@ export default function ProductsPage() {
                       >
                         Learn More <ArrowRight className="size-4" />
                       </Link>
-                      <a
-                        href={product.whatsappMessage}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-flex items-center gap-2 px-6 py-3 rounded-button font-semibold border-2 hover:-translate-y-0.5 transition-all"
-                        style={{ borderColor: product.color, color: product.color }}
-                      >
-                        Request Demo
-                      </a>
+                      {product.liveUrl ? (
+                        <a
+                          href={product.liveUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center gap-2 px-6 py-3 rounded-button font-semibold border-2 hover:-translate-y-0.5 transition-all"
+                          style={{ borderColor: product.color, color: product.color }}
+                        >
+                          Visit Live Site <ExternalLink className="size-4" />
+                        </a>
+                      ) : (
+                        <a
+                          href={product.whatsappMessage}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center gap-2 px-6 py-3 rounded-button font-semibold border-2 hover:-translate-y-0.5 transition-all"
+                          style={{ borderColor: product.color, color: product.color }}
+                        >
+                          Request Demo
+                        </a>
+                      )}
                     </div>
                   </div>
                 </div>

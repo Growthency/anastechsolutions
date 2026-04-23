@@ -13,9 +13,58 @@ export interface Product {
   screenshots: string[];
   whatsappMessage: string;
   faqs: { q: string; a: string }[];
+  liveUrl?: string;
+  developer?: { name: string; role: string };
+  poweredBy?: { name: string; url: string }[];
 }
 
 export const products: Product[] = [
+  {
+    slug: "muhius-sunnah",
+    title: "Muhius Sunnah",
+    tagline: "All-in-one Islamic management platform",
+    description:
+      "A modern management software built for Islamic organizations, madrasas, and da'wah platforms — unifying content, students, scholars, and operations in one secure dashboard. Live and in active use at muhiussunnah.app.",
+    icon: "BookMarked",
+    color: "#10B981",
+    bgColor: "rgba(16, 185, 129, 0.08)",
+    liveUrl: "https://muhiussunnah.app/",
+    developer: {
+      name: "Mustaqeem Billah",
+      role: "Software Engineer — full-stack development",
+    },
+    poweredBy: [
+      { name: "Growthency", url: "https://growthency.com" },
+      { name: "AnasTech Solutions", url: "https://anastechsolutions.com" },
+    ],
+    features: [
+      { title: "Content Library", description: "Organize articles, lectures, and scholarly resources with categories, tags, and search.", icon: "BookMarked" },
+      { title: "Scholar & Teacher Portal", description: "Manage scholar profiles, teaching schedules, and publication history in one place.", icon: "GraduationCap" },
+      { title: "Student Management", description: "Enrollments, attendance, progress tracking, and certificate issuance.", icon: "Users" },
+      { title: "Multilingual Support", description: "Bengali, Arabic, and English content delivery with right-to-left UI support.", icon: "Languages" },
+      { title: "Secure Admin Dashboard", description: "Role-based access, audit logs, and encrypted credential storage for the whole team.", icon: "ShieldCheck" },
+      { title: "Responsive & Fast", description: "Optimized for phones, tablets, and desktops with sub-second navigation and SEO-ready pages.", icon: "Zap" },
+    ],
+    modules: [
+      "Content Management System",
+      "Scholar & Teacher Directory",
+      "Student Enrollment & Progress",
+      "Event & Program Scheduler",
+      "Donation & Finance Tracking",
+      "Multilingual Publishing (BN / AR / EN)",
+      "Role-based Admin Panel",
+      "SMS & Email Notifications",
+      "Analytics Dashboard",
+      "Public Website Integration",
+    ],
+    screenshots: [],
+    whatsappMessage: waLink("Hi AnasTech, I'm interested in the Muhius Sunnah platform. Can we connect?"),
+    faqs: [
+      { q: "Can I see Muhius Sunnah in action?", a: "Yes — the live production site is available at muhiussunnah.app. Explore it directly or request a guided walkthrough on WhatsApp." },
+      { q: "Who built and maintains it?", a: "Full-stack development is led by Software Engineer Mustaqeem Billah, with product and growth support from Growthency and AnasTech Solutions." },
+      { q: "Can the platform be customized for my organization?", a: "Yes. The underlying stack is modular — branding, modules, languages, and workflows can all be tailored. Contact us to scope a custom deployment." },
+    ],
+  },
   {
     slug: "khdimatul-ummah",
     title: "Khdimatul Ummah",

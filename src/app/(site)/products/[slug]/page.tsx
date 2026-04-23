@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Link from "next/link";
-import { ArrowLeft, MessageCircle, CheckCircle2, Heart, BarChart3, Stethoscope, Zap } from "lucide-react";
+import { ArrowLeft, MessageCircle, CheckCircle2, Heart, BarChart3, Stethoscope, Zap, BookMarked, ExternalLink, Code2, Sparkles } from "lucide-react";
 import { ScrollReveal } from "@/components/effects/ScrollReveal";
 import { GradientBlob } from "@/components/effects/GradientBlob";
 import { SectionDivider } from "@/components/effects/SectionDivider";
@@ -9,7 +9,7 @@ import { Accordion } from "@/components/ui/accordion";
 import { products, getProductBySlug } from "@/lib/data/products";
 
 const productIconMap: Record<string, React.ComponentType<{ className?: string; style?: React.CSSProperties }>> = {
-  Heart, BarChart3, Stethoscope, Zap,
+  BookMarked, Heart, BarChart3, Stethoscope, Zap,
 };
 
 export async function generateStaticParams() {
@@ -47,17 +47,38 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
           </ScrollReveal>
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <ScrollReveal>
-              <p className="text-sm font-semibold uppercase tracking-widest mb-3" style={{ color: product.color }}>AnasTech Product</p>
+              <div className="flex items-center gap-2 mb-3">
+                <p className="text-sm font-semibold uppercase tracking-widest" style={{ color: product.color }}>AnasTech Product</p>
+                {product.liveUrl && (
+                  <span className="inline-flex items-center gap-1 text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full" style={{ backgroundColor: product.color + "15", color: product.color, border: `1px solid ${product.color}30` }}>
+                    <span className="w-1.5 h-1.5 rounded-full animate-pulse" style={{ backgroundColor: product.color }} />
+                    Live in Production
+                  </span>
+                )}
+              </div>
               <h1 className="font-display text-5xl lg:text-6xl font-bold text-ink mb-3 leading-tight">{product.title}</h1>
               <p className="text-xl font-medium mb-4" style={{ color: product.color }}>{product.tagline}</p>
               <p className="text-ink-soft text-lg leading-relaxed mb-8">{product.description}</p>
               <div className="flex flex-wrap gap-3">
+                {product.liveUrl && (
+                  <a
+                    href={product.liveUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 px-7 py-3.5 rounded-button font-bold text-white shadow-lg hover:-translate-y-0.5 transition-all"
+                    style={{ backgroundColor: product.color }}
+                  >
+                    <ExternalLink className="size-4" /> Visit Live Site
+                  </a>
+                )}
                 <a
                   href={product.whatsappMessage}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 px-7 py-3.5 rounded-button font-bold text-white shadow-lg hover:-translate-y-0.5 transition-all"
-                  style={{ backgroundColor: product.color }}
+                  className={`inline-flex items-center gap-2 px-7 py-3.5 rounded-button font-bold hover:-translate-y-0.5 transition-all ${product.liveUrl ? "border-2" : "text-white shadow-lg"}`}
+                  style={product.liveUrl
+                    ? { borderColor: product.color, color: product.color }
+                    : { backgroundColor: product.color }}
                 >
                   <MessageCircle className="size-4" /> Request Demo
                 </a>
@@ -120,14 +141,74 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
         </div>
       </section>
 
+      {/* Built by / Powered by */}
+      {(product.developer || product.poweredBy) && (
+        <section className="section-pad bg-paper">
+          <div className="max-w-5xl mx-auto px-6 lg:px-8">
+            <ScrollReveal className="text-center mb-10">
+              <h2 className="font-display text-4xl font-bold text-ink mb-3">Built & Backed By</h2>
+              <p className="text-ink-soft">The engineering minds and partners behind {product.title}.</p>
+            </ScrollReveal>
+            <div className="grid md:grid-cols-2 gap-6">
+              {product.developer && (
+                <ScrollReveal>
+                  <div className="h-full bg-paper-2 border border-border rounded-2xl p-6 hover:border-brand-blue/30 transition-all">
+                    <div className="flex items-start gap-4">
+                      <div className="w-12 h-12 rounded-xl flex items-center justify-center shrink-0" style={{ backgroundColor: product.bgColor, border: `1px solid ${product.color}30` }}>
+                        <Code2 className="size-5" style={{ color: product.color }} />
+                      </div>
+                      <div className="min-w-0">
+                        <p className="text-xs font-semibold uppercase tracking-widest mb-1" style={{ color: product.color }}>Lead Developer</p>
+                        <h3 className="font-display text-xl font-bold text-ink mb-1">{product.developer.name}</h3>
+                        <p className="text-ink-soft text-sm leading-relaxed">{product.developer.role}</p>
+                      </div>
+                    </div>
+                  </div>
+                </ScrollReveal>
+              )}
+              {product.poweredBy && product.poweredBy.length > 0 && (
+                <ScrollReveal delay={0.1}>
+                  <div className="h-full bg-paper-2 border border-border rounded-2xl p-6 hover:border-brand-blue/30 transition-all">
+                    <div className="flex items-start gap-4">
+                      <div className="w-12 h-12 rounded-xl flex items-center justify-center shrink-0" style={{ backgroundColor: product.bgColor, border: `1px solid ${product.color}30` }}>
+                        <Sparkles className="size-5" style={{ color: product.color }} />
+                      </div>
+                      <div className="min-w-0 flex-1">
+                        <p className="text-xs font-semibold uppercase tracking-widest mb-1" style={{ color: product.color }}>Powered By</p>
+                        <h3 className="font-display text-xl font-bold text-ink mb-3">Strategic Partners</h3>
+                        <div className="flex flex-wrap gap-2">
+                          {product.poweredBy.map((partner) => (
+                            <a
+                              key={partner.name}
+                              href={partner.url}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-sm font-medium border hover:-translate-y-0.5 transition-all"
+                              style={{ borderColor: product.color + "40", color: product.color, backgroundColor: product.bgColor }}
+                            >
+                              {partner.name}
+                              <ExternalLink className="size-3" />
+                            </a>
+                          ))}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </ScrollReveal>
+              )}
+            </div>
+          </div>
+        </section>
+      )}
+
       {/* FAQ */}
-      <section className="section-pad bg-paper">
+      <section className="section-pad bg-paper-2">
         <div className="max-w-3xl mx-auto px-6 lg:px-8">
           <ScrollReveal className="text-center mb-10">
             <h2 className="font-display text-4xl font-bold text-ink mb-3">Frequently Asked</h2>
           </ScrollReveal>
           <ScrollReveal>
-            <div className="bg-paper-2 rounded-2xl border border-border px-6">
+            <div className="bg-paper rounded-2xl border border-border px-6">
               <Accordion items={product.faqs} />
             </div>
           </ScrollReveal>
