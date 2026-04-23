@@ -8,11 +8,26 @@ const MAX_AGE_SECONDS = 60 * 60 * 24 * 7;
 const DEV_FALLBACK_SECRET =
   "dev-only-fallback-change-in-prod-32-chars-min-length";
 
+// Per-process ephemeral secret used when SESSION_SECRET isn't configured.
+// Sessions won't survive a container restart, but the app stays up and we
+// don't leak 500s to visitors. Set SESSION_SECRET on the host to fix this.
+let ephemeralSecret: string | null = null;
+let warnedMissingSecret = false;
+
 function getSecret(): string {
   const s = process.env.SESSION_SECRET;
   if (s && s.length >= 16) return s;
   if (process.env.NODE_ENV === "production") {
-    throw new Error("SESSION_SECRET env var is required in production");
+    if (!warnedMissingSecret) {
+      console.error(
+        "[session] SESSION_SECRET is not set. Using an ephemeral per-process secret — sessions will not survive restarts.",
+      );
+      warnedMissingSecret = true;
+    }
+    if (!ephemeralSecret) {
+      ephemeralSecret = crypto.randomBytes(32).toString("base64url");
+    }
+    return ephemeralSecret;
   }
   return DEV_FALLBACK_SECRET;
 }
