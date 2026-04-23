@@ -5,7 +5,11 @@ import { ArrowLeft, Calendar, Clock, MessageCircle, ArrowRight } from "lucide-re
 import { ScrollReveal } from "@/components/effects/ScrollReveal";
 import { SectionDivider } from "@/components/effects/SectionDivider";
 import { WA_LINKS } from "@/lib/utils";
-import { blogPosts, getPostBySlug } from "@/lib/data/blog-posts";
+import { blogPosts } from "@/lib/data/blog-posts";
+import { getAllPosts, getPostBySlug } from "@/lib/data/posts";
+
+export const revalidate = 60;
+export const dynamicParams = true;
 
 export async function generateStaticParams() {
   return blogPosts.map((p) => ({ slug: p.slug }));
@@ -13,7 +17,7 @@ export async function generateStaticParams() {
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const { slug } = await params;
-  const post = getPostBySlug(slug);
+  const post = await getPostBySlug(slug);
   if (!post) return {};
   return {
     title: post.title,
@@ -23,10 +27,11 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
 
 export default async function BlogPostPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
-  const post = getPostBySlug(slug);
+  const post = await getPostBySlug(slug);
   if (!post) notFound();
 
-  const related = blogPosts.filter((p) => p.slug !== slug).slice(0, 3);
+  const all = await getAllPosts();
+  const related = all.filter((p) => p.slug !== slug).slice(0, 3);
 
   return (
     <>
@@ -80,7 +85,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
               prose-blockquote:border-brand-blue prose-blockquote:text-ink-soft
               prose-code:text-brand-red prose-code:bg-paper-2 prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded
             ">
-              <div dangerouslySetInnerHTML={{ __html: markdownToHtml(post.content) }} />
+              <div dangerouslySetInnerHTML={{ __html: renderContent(post.content) }} />
             </article>
           </ScrollReveal>
 
@@ -135,6 +140,15 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
       )}
     </>
   );
+}
+
+// If content already looks like HTML (admin-authored via rich editor), render as-is.
+// Otherwise treat it as Markdown (legacy static posts).
+function renderContent(content: string): string {
+  if (/^\s*<(p|h[1-6]|div|section|article|ul|ol|blockquote|figure|table|img)\b/i.test(content)) {
+    return content;
+  }
+  return markdownToHtml(content);
 }
 
 // Simple markdown-to-HTML converter

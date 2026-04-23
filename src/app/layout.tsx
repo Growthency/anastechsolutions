@@ -1,6 +1,10 @@
 import type { Metadata, Viewport } from "next";
+import Script from "next/script";
 import { Space_Grotesk, Inter, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
+
+const GA_ID = "G-NNGFJ1RY65";
+const GSC_VERIFICATION = "w5cATul3Xqj6k_g5GzUrb66VekDvMRYXTVJvqXgWLUU";
 
 const spaceGrotesk = Space_Grotesk({
   variable: "--font-space-grotesk",
@@ -61,6 +65,9 @@ export const metadata: Metadata = {
     follow: true,
     googleBot: { index: true, follow: true },
   },
+  verification: {
+    google: GSC_VERIFICATION,
+  },
   manifest: "/manifest.webmanifest",
   appleWebApp: {
     capable: true,
@@ -92,6 +99,18 @@ export default function RootLayout({
         {/* Noise overlay for premium texture */}
         <div className="noise-overlay" aria-hidden="true" />
         {children}
+        <Script
+          src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`}
+          strategy="afterInteractive"
+        />
+        <Script id="ga4-init" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', '${GA_ID}');
+          `}
+        </Script>
       </body>
     </html>
   );

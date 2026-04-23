@@ -5,12 +5,14 @@ import { ScrollReveal } from "@/components/effects/ScrollReveal";
 import { GradientBlob } from "@/components/effects/GradientBlob";
 import { SectionDivider } from "@/components/effects/SectionDivider";
 import { CtaBand } from "@/components/sections/CtaBand";
-import { blogPosts } from "@/lib/data/blog-posts";
+import { getAllPosts } from "@/lib/data/posts";
 
 export const metadata: Metadata = {
   title: "Blog & Insights",
   description: "Expert articles on web development, mobile apps, SMS marketing, and business growth from the AnasTech Solutions team.",
 };
+
+export const revalidate = 60;
 
 const categoryColors: Record<string, string> = {
   "Digital Strategy": "#0F75BC",
@@ -19,8 +21,16 @@ const categoryColors: Record<string, string> = {
   "SMS Marketing": "#ED1C24",
 };
 
-export default function BlogPage() {
-  const [featured, ...rest] = blogPosts;
+export default async function BlogPage() {
+  const posts = await getAllPosts();
+  const [featured, ...rest] = posts;
+  if (!featured) {
+    return (
+      <section className="min-h-screen flex items-center justify-center">
+        <p className="text-ink-soft">No posts yet.</p>
+      </section>
+    );
+  }
 
   return (
     <>
