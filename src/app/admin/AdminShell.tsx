@@ -8,6 +8,7 @@ import {
 import { useState } from 'react'
 import { useTheme } from '@/components/providers/ThemeProvider'
 import { logoutAction } from '../login/actions'
+import { Logo } from '@/components/shared/Logo'
 
 const NAV = [
   { href: '/admin',           label: 'Dashboard', icon: LayoutDashboard },
@@ -37,8 +38,8 @@ export default function AdminShell({ children, userEmail }: { children: React.Re
         {/* Logo */}
         <div className="px-6 py-5 border-b" style={{ borderColor: dark ? 'rgba(255,255,255,0.06)' : '#e2e8f0' }}>
           <Link href="/admin" className="flex items-center gap-2.5">
-            <div className="w-8 h-8 rounded-lg flex items-center justify-center text-white text-sm font-bold shadow-lg" style={{ background: 'linear-gradient(135deg, #0F75BC 0%, #ED1C24 100%)', boxShadow: '0 6px 16px rgba(15,117,188,0.25)' }}>
-              A
+            <div className="w-9 h-9 rounded-lg flex items-center justify-center overflow-hidden" style={{ background: dark ? 'rgba(255,255,255,0.06)' : '#f8fafc', boxShadow: '0 6px 16px rgba(15,117,188,0.15)' }}>
+              <Logo size={32} />
             </div>
             <div>
               <span className="text-[15px] font-bold tracking-tight" style={{ color: dark ? '#fff' : '#0f172a' }}>Admin</span>
@@ -119,7 +120,9 @@ export default function AdminShell({ children, userEmail }: { children: React.Re
         style={{ borderColor: dark ? 'rgba(255,255,255,0.06)' : '#e2e8f0', background: dark ? 'rgba(12,17,32,0.95)' : 'rgba(255,255,255,0.95)' }}
       >
         <div className="flex items-center gap-2">
-          <div className="w-7 h-7 rounded-lg flex items-center justify-center text-white text-xs font-bold" style={{ background: 'linear-gradient(135deg, #0F75BC 0%, #ED1C24 100%)' }}>A</div>
+          <div className="w-8 h-8 rounded-lg flex items-center justify-center overflow-hidden" style={{ background: dark ? 'rgba(255,255,255,0.06)' : '#f8fafc' }}>
+            <Logo size={28} />
+          </div>
           <span className="text-sm font-bold" style={{ color: dark ? '#fff' : '#0f172a' }}>Admin</span>
         </div>
         <div className="flex items-center gap-2">

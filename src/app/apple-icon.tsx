@@ -1,9 +1,16 @@
 import { ImageResponse } from "next/og";
+import { readFile } from "node:fs/promises";
+import path from "node:path";
 
+export const runtime = "nodejs";
 export const size = { width: 180, height: 180 };
 export const contentType = "image/png";
 
-export default function AppleIcon() {
+export default async function AppleIcon() {
+  const logoPath = path.join(process.cwd(), "public", "anastechlogo.webp");
+  const logoBuffer = await readFile(logoPath);
+  const logoDataUri = `data:image/webp;base64,${logoBuffer.toString("base64")}`;
+
   return new ImageResponse(
     (
       <div
@@ -17,12 +24,10 @@ export default function AppleIcon() {
           borderRadius: 36,
         }}
       >
-        <svg width="120" height="120" viewBox="0 0 40 40" fill="none">
-          <polygon points="20,2 38,34 2,34" fill="#ED1C24" opacity="0.9" />
-          <polygon points="20,10 35,36 5,36" fill="#0F75BC" opacity="0.85" />
-        </svg>
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img src={logoDataUri} width={140} height={140} alt="AnasTech" />
       </div>
     ),
-    { ...size }
+    { ...size },
   );
 }

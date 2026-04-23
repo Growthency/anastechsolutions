@@ -7,6 +7,7 @@ import { GradientBlob } from "@/components/effects/GradientBlob";
 import { TypeWriter } from "@/components/effects/TypeWriter";
 import { MagneticButton } from "@/components/effects/MagneticButton";
 import { WA_LINKS } from "@/lib/utils";
+import { Logo } from "@/components/shared/Logo";
 
 const floatingCards = [
   {
@@ -208,11 +209,8 @@ export function Hero() {
               transition={{ duration: 0.8, delay: 0.4 }}
             >
               <div className="relative">
-                <div className="w-32 h-32 rounded-3xl bg-gradient-to-br from-brand-blue to-brand-red flex items-center justify-center shadow-blue">
-                  <svg width="56" height="56" viewBox="0 0 40 40" fill="none">
-                    <polygon points="20,2 38,34 2,34" fill="white" opacity="0.9" />
-                    <polygon points="20,10 35,36 5,36" fill="white" opacity="0.6" />
-                  </svg>
+                <div className="w-32 h-32 rounded-3xl bg-white flex items-center justify-center shadow-blue ring-4 ring-brand-blue/10 p-4">
+                  <Logo size={96} priority />
                 </div>
                 {/* Orbit rings */}
                 <div className="absolute inset-[-24px] rounded-full border border-brand-blue/20 animate-spin" style={{ animationDuration: "8s" }} />

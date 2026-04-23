@@ -3,6 +3,7 @@ import { MessageCircle, Phone, Mail, MapPin } from "lucide-react";
 import { WA_LINKS, WA_BASE } from "@/lib/utils";
 import { services } from "@/lib/data/services";
 import { products } from "@/lib/data/products";
+import { Logo } from "@/components/shared/Logo";
 
 export function Footer() {
   const year = new Date().getFullYear();
@@ -13,11 +14,18 @@ export function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-8">
           {/* Brand */}
           <div className="lg:col-span-1">
-            <Link href="/" className="flex items-center gap-0 mb-4" aria-label="AnasTech Solutions Home">
-              <svg width="36" height="36" viewBox="0 0 40 40" fill="none">
-                <polygon points="20,2 38,34 2,34" fill="#ED1C24" opacity="0.9" />
-                <polygon points="20,10 35,36 5,36" fill="#0F75BC" opacity="0.85" />
-              </svg>
+            <Link href="/" className="flex items-center gap-3 mb-4" aria-label="AnasTech Solutions Home">
+              <div className="bg-white rounded-xl p-1.5 shadow-sm">
+                <Logo size={40} />
+              </div>
+              <div className="flex flex-col leading-none">
+                <span className="font-display font-bold text-[17px] text-white tracking-tight leading-none">
+                  Anas<span className="text-brand-red">Tech</span>
+                </span>
+                <span className="text-[9px] font-semibold text-white/50 tracking-[0.22em] uppercase leading-none mt-[3px]">
+                  Solutions
+                </span>
+              </div>
             </Link>
             <p className="text-white/60 text-sm leading-relaxed mb-6">
               Building digital futures for businesses across Bangladesh and beyond. Enterprise websites, software, mobile apps, and more.

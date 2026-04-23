@@ -7,6 +7,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, MessageCircle } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { WA_LINKS } from "@/lib/utils";
+import { Logo } from "@/components/shared/Logo";
 
 const navLinks = [
   { label: "Home", href: "/" },
@@ -16,13 +17,6 @@ const navLinks = [
   { label: "About", href: "/about" },
   { label: "Contact", href: "/contact" },
 ];
-
-const LogoMark = ({ size = 32 }: { size?: number }) => (
-  <svg width={size} height={size} viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <polygon points="20,2 38,34 2,34" fill="#ED1C24" opacity="0.9" />
-    <polygon points="20,10 35,36 5,36" fill="#0F75BC" opacity="0.85" />
-  </svg>
-);
 
 export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
@@ -60,7 +54,7 @@ export function Navbar() {
         >
           {/* Logo */}
           <Link href="/" className="flex items-center gap-2.5 flex-shrink-0" aria-label="AnasTech Solutions Home">
-            <LogoMark size={scrolled ? 28 : 34} />
+            <Logo size={scrolled ? 36 : 44} priority />
             <div className="flex flex-col leading-none">
               <span className="font-display font-bold text-[17px] text-ink tracking-tight leading-none">
                 Anas<span className="text-brand-red">Tech</span>
@@ -128,7 +122,7 @@ export function Navbar() {
             {/* Header */}
             <div className="flex items-center justify-between px-6 h-16 border-b border-border/60">
               <Link href="/" className="flex items-center gap-2.5" onClick={() => setMobileOpen(false)}>
-                <LogoMark size={28} />
+                <Logo size={36} />
                 <div className="flex flex-col leading-none">
                   <span className="font-display font-bold text-[17px] text-ink tracking-tight leading-none">
                     Anas<span className="text-brand-red">Tech</span>

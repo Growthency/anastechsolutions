@@ -3,25 +3,13 @@ import Link from "next/link";
 import { redirect } from "next/navigation";
 import { readSession } from "@/lib/auth/session";
 import { LoginForm } from "./LoginForm";
+import { Logo } from "@/components/shared/Logo";
 
 export const metadata: Metadata = {
   title: "Admin Login",
   description: "Sign in to manage AnasTech Solutions blog posts.",
   robots: { index: false, follow: false },
 };
-
-const LogoMark = ({ size = 44 }: { size?: number }) => (
-  <svg
-    width={size}
-    height={size}
-    viewBox="0 0 40 40"
-    fill="none"
-    xmlns="http://www.w3.org/2000/svg"
-  >
-    <polygon points="20,2 38,34 2,34" fill="#ED1C24" opacity="0.9" />
-    <polygon points="20,10 35,36 5,36" fill="#0F75BC" opacity="0.85" />
-  </svg>
-);
 
 export default async function LoginPage() {
   const session = await readSession();
@@ -42,7 +30,7 @@ export default async function LoginPage() {
           className="flex items-center justify-center gap-3 mb-8"
           aria-label="AnasTech Solutions Home"
         >
-          <LogoMark size={44} />
+          <Logo size={52} priority />
           <div className="flex flex-col leading-none">
             <span className="font-display font-bold text-xl text-ink tracking-tight">
               Anas<span className="text-brand-red">Tech</span>

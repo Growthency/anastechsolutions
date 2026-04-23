@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { Home, ArrowLeft, MessageCircle, Search } from "lucide-react";
 import { WA_LINKS } from "@/lib/utils";
+import { Logo } from "@/components/shared/Logo";
 
 export default function NotFound() {
   const quickLinks = [
@@ -22,10 +23,7 @@ export default function NotFound() {
       <div className="relative z-10 text-center max-w-2xl mx-auto">
         {/* Logo */}
         <Link href="/" className="inline-flex items-center mb-12" aria-label="AnasTech Solutions Home">
-          <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
-            <polygon points="20,2 38,34 2,34" fill="#ED1C24" opacity="0.9" />
-            <polygon points="20,10 35,36 5,36" fill="#0F75BC" opacity="0.85" />
-          </svg>
+          <Logo size={56} />
         </Link>
 
         {/* 404 */}
