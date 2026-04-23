@@ -68,6 +68,15 @@ export const metadata: Metadata = {
   verification: {
     google: GSC_VERIFICATION,
   },
+  icons: {
+    icon: [
+      { url: "/anastechlogo.webp", type: "image/webp" },
+    ],
+    shortcut: "/anastechlogo.webp",
+    apple: [
+      { url: "/anastechlogo.webp", type: "image/webp" },
+    ],
+  },
   manifest: "/manifest.webmanifest",
   appleWebApp: {
     capable: true,
