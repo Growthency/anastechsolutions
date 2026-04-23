@@ -2,8 +2,8 @@
 import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import {
-  FileText, CheckCircle2, FileEdit, Eye, BarChart3, ExternalLink,
-  Loader2, Plus, TrendingUp, Calendar, ArrowUpRight,
+  FileText, CheckCircle2, FileEdit, Eye, BarChart3,
+  Loader2, Plus, Calendar,
 } from 'lucide-react'
 import { useTheme } from '@/components/providers/ThemeProvider'
 
@@ -70,16 +70,13 @@ export default function AdminDashboard() {
           >
             <Plus className="w-4 h-4" /> New Page
           </Link>
-          <a
-            href="https://analytics.google.com/"
-            target="_blank"
-            rel="noopener noreferrer"
+          <Link
+            href="/admin/analytics"
             className="flex items-center gap-2 px-4 py-2.5 rounded-xl text-[13px] font-medium transition-colors"
             style={{ background: dark ? 'rgba(255,255,255,0.05)' : '#f1f5f9', border: `1px solid ${cardBorder}`, color: textPrimary }}
           >
-            <BarChart3 className="w-4 h-4" /> Open Google Analytics
-            <ExternalLink className="w-3.5 h-3.5" style={{ color: textMuted }} />
-          </a>
+            <BarChart3 className="w-4 h-4" /> Open Analytics
+          </Link>
         </div>
       </div>
 
@@ -89,55 +86,6 @@ export default function AdminDashboard() {
         <StatCard icon={CheckCircle2} label="Published" value={published} color="emerald" loading={loading} dark={dark} />
         <StatCard icon={FileEdit} label="Drafts" value={drafts} color="amber" loading={loading} dark={dark} />
         <StatCard icon={Eye} label="Total Views" value={totalViews} color="purple" loading={loading} dark={dark} />
-      </div>
-
-      {/* Analytics callout */}
-      <div
-        className="rounded-2xl border p-6 mb-8 relative overflow-hidden"
-        style={{ background: cardBg, borderColor: cardBorder }}
-      >
-        <div
-          className="absolute -right-20 -top-20 w-64 h-64 rounded-full opacity-20 blur-3xl"
-          style={{ background: 'radial-gradient(circle, #0F75BC 0%, transparent 70%)' }}
-        />
-        <div className="relative z-10 flex items-start gap-4">
-          <div
-            className="w-12 h-12 rounded-xl flex items-center justify-center shrink-0"
-            style={{ background: 'linear-gradient(135deg, #0F75BC, #ED1C24)' }}
-          >
-            <TrendingUp className="w-6 h-6 text-white" />
-          </div>
-          <div className="flex-1">
-            <h2 className="text-lg font-bold mb-1" style={{ color: textPrimary }}>
-              Analytics are live
-            </h2>
-            <p className="text-sm leading-relaxed mb-4" style={{ color: textSoft }}>
-              Google Analytics (GA4) is wired into every page on anastechsolutions.com. Real-time visitor, geographic, and page performance
-              data is available on the official Google Analytics dashboard. Search Console tracks search
-              impressions, clicks, and keyword rankings.
-            </p>
-            <div className="flex flex-wrap gap-2">
-              <a
-                href="https://analytics.google.com/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold transition-colors text-white"
-                style={{ background: '#0F75BC' }}
-              >
-                GA4 Dashboard <ArrowUpRight className="w-3.5 h-3.5" />
-              </a>
-              <a
-                href="https://search.google.com/search-console"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold transition-colors"
-                style={{ background: dark ? 'rgba(255,255,255,0.06)' : '#f1f5f9', border: `1px solid ${cardBorder}`, color: textPrimary }}
-              >
-                Search Console <ArrowUpRight className="w-3.5 h-3.5" />
-              </a>
-            </div>
-          </div>
-        </div>
       </div>
 
       {/* Recent posts */}
