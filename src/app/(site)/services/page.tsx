@@ -11,6 +11,7 @@ import { cn } from "@/lib/utils";
 export const metadata: Metadata = {
   title: "Our Services",
   description: "Website development, software, mobile apps, bulk SMS, call center, accounting & business development services by AnasTech Solutions.",
+  alternates: { canonical: "/services" },
 };
 
 const iconMap: Record<string, React.ComponentType<{ className?: string; style?: React.CSSProperties }>> = {

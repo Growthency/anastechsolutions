@@ -2,6 +2,12 @@ import type { Metadata, Viewport } from "next";
 import Script from "next/script";
 import { Space_Grotesk, Inter, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
+import { JsonLd } from "@/components/seo/JsonLd";
+import {
+  organizationSchema,
+  websiteSchema,
+  localBusinessSchema,
+} from "@/lib/seo/schemas";
 
 const GA_ID = "G-NNGFJ1RY65";
 const GSC_VERIFICATION = "w5cATul3Xqj6k_g5GzUrb66VekDvMRYXTVJvqXgWLUU";
@@ -60,10 +66,19 @@ export const metadata: Metadata = {
     description:
       "Enterprise websites, software, mobile apps, bulk SMS & call center solutions.",
   },
+  alternates: {
+    canonical: "/",
+  },
   robots: {
     index: true,
     follow: true,
-    googleBot: { index: true, follow: true },
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
   },
   verification: {
     google: GSC_VERIFICATION,
@@ -107,6 +122,10 @@ export default function RootLayout({
         </a>
         {/* Noise overlay for premium texture */}
         <div className="noise-overlay" aria-hidden="true" />
+        {/* Site-wide structured data — parsed by Google for Knowledge Graph + sitelinks */}
+        <JsonLd data={organizationSchema()} />
+        <JsonLd data={websiteSchema()} />
+        <JsonLd data={localBusinessSchema()} />
         {children}
         <Script
           src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`}

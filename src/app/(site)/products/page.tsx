@@ -10,6 +10,7 @@ import { products } from "@/lib/data/products";
 export const metadata: Metadata = {
   title: "Our Products",
   description: "Muhius Sunnah, Khdimatul Ummah, eBusiness, Hospital Care, and Bulk SMS Platform — enterprise software products by AnasTech Solutions.",
+  alternates: { canonical: "/products" },
 };
 
 const iconMap: Record<string, React.ComponentType<{ className?: string; style?: React.CSSProperties }>> = {

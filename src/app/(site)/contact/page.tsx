@@ -8,6 +8,7 @@ import { WA_LINKS } from "@/lib/utils";
 export const metadata: Metadata = {
   title: "Contact Us",
   description: "Get in touch with AnasTech Solutions. Chat on WhatsApp, call, or email us. We respond within 1 hour.",
+  alternates: { canonical: "/contact" },
 };
 
 const contactCards = [

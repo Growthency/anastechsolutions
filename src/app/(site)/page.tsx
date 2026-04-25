@@ -14,6 +14,7 @@ export const metadata: Metadata = {
   title: { absolute: "AnasTech Solutions — Digital Agency Bangladesh" },
   description:
     "Enterprise websites, software, mobile apps, bulk SMS & call center solutions. Trusted by 80+ businesses in 10+ countries. Chat with us on WhatsApp.",
+  alternates: { canonical: "/" },
 };
 
 export default function HomePage() {

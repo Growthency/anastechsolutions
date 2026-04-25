@@ -7,6 +7,13 @@ import { GradientBlob } from "@/components/effects/GradientBlob";
 import { SectionDivider } from "@/components/effects/SectionDivider";
 import { Accordion } from "@/components/ui/accordion";
 import { services, getServiceBySlug } from "@/lib/data/services";
+import { JsonLd } from "@/components/seo/JsonLd";
+import {
+  serviceSchema,
+  breadcrumbSchema,
+  faqPageSchema,
+  SITE_URL,
+} from "@/lib/seo/schemas";
 
 const iconMap: Record<string, React.ComponentType<{ className?: string; style?: React.CSSProperties }>> = {
   Globe, Code2, Smartphone, TrendingUp, Calculator, MessageSquare, Phone,
@@ -20,9 +27,22 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const { slug } = await params;
   const service = getServiceBySlug(slug);
   if (!service) return {};
+  const canonical = `/services/${service.slug}`;
   return {
     title: service.title,
     description: service.description,
+    alternates: { canonical },
+    openGraph: {
+      title: `${service.title} — ${service.tagline}`,
+      description: service.description,
+      url: canonical,
+      type: "website",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `${service.title} — ${service.tagline}`,
+      description: service.description,
+    },
   };
 }
 
@@ -35,6 +55,23 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
 
   return (
     <>
+      {/* Structured data — Service, Breadcrumb, FAQ */}
+      <JsonLd
+        data={serviceSchema({
+          slug: service.slug,
+          title: service.title,
+          description: service.description,
+        })}
+      />
+      <JsonLd
+        data={breadcrumbSchema([
+          { name: "Home", url: `${SITE_URL}/` },
+          { name: "Services", url: `${SITE_URL}/services` },
+          { name: service.title, url: `${SITE_URL}/services/${service.slug}` },
+        ])}
+      />
+      {service.faqs?.length > 0 && <JsonLd data={faqPageSchema(service.faqs)} />}
+
       {/* Hero */}
       <section className="relative pt-32 pb-20 overflow-hidden" style={{ backgroundColor: service.bgColor }}>
         <GradientBlob color="blue" size="xl" className="-top-32 -right-32" opacity={0.08} />

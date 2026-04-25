@@ -10,6 +10,7 @@ import { WA_LINKS, waLink } from "@/lib/utils";
 export const metadata: Metadata = {
   title: "Customer Support",
   description: "Get support for AnasTech products — Khdimatul Ummah, eBusiness, Hospital Care, and Bulk SMS Platform. WhatsApp support available 7 days a week.",
+  alternates: { canonical: "/support" },
 };
 
 const productIconMap: Record<string, React.ComponentType<{ className?: string; style?: React.CSSProperties }>> = {

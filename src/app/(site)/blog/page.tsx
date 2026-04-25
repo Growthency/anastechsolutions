@@ -10,6 +10,7 @@ import { getAllPosts } from "@/lib/data/posts";
 export const metadata: Metadata = {
   title: "Blog & Insights",
   description: "Expert articles on web development, mobile apps, SMS marketing, and business growth from the AnasTech Solutions team.",
+  alternates: { canonical: "/blog" },
 };
 
 export const revalidate = 60;

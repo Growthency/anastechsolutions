@@ -11,6 +11,7 @@ import { WA_LINKS } from "@/lib/utils";
 export const metadata: Metadata = {
   title: "About Us",
   description: "Learn about AnasTech Solutions — our story, mission, values, and the team behind Bangladesh's leading digital agency.",
+  alternates: { canonical: "/about" },
 };
 
 const values = [

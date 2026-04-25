@@ -7,6 +7,12 @@ import { SectionDivider } from "@/components/effects/SectionDivider";
 import { WA_LINKS } from "@/lib/utils";
 import { blogPosts } from "@/lib/data/blog-posts";
 import { getAllPosts, getPostBySlug } from "@/lib/data/posts";
+import { JsonLd } from "@/components/seo/JsonLd";
+import {
+  articleSchema,
+  breadcrumbSchema,
+  SITE_URL,
+} from "@/lib/seo/schemas";
 
 export const revalidate = 60;
 export const dynamicParams = true;
@@ -19,9 +25,26 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const { slug } = await params;
   const post = await getPostBySlug(slug);
   if (!post) return {};
+  const canonical = `/blog/${post.slug}`;
   return {
     title: post.title,
     description: post.excerpt,
+    alternates: { canonical },
+    openGraph: {
+      title: post.title,
+      description: post.excerpt,
+      url: canonical,
+      type: "article",
+      publishedTime: post.date,
+      authors: [post.author],
+      images: post.coverImage ? [{ url: post.coverImage }] : undefined,
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: post.title,
+      description: post.excerpt,
+      images: post.coverImage ? [post.coverImage] : undefined,
+    },
   };
 }
 
@@ -35,6 +58,25 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
 
   return (
     <>
+      {/* Structured data — BlogPosting + Breadcrumb */}
+      <JsonLd
+        data={articleSchema({
+          slug: post.slug,
+          title: post.title,
+          description: post.excerpt,
+          image: post.coverImage,
+          author: post.author,
+          datePublished: post.date,
+        })}
+      />
+      <JsonLd
+        data={breadcrumbSchema([
+          { name: "Home", url: `${SITE_URL}/` },
+          { name: "Blog", url: `${SITE_URL}/blog` },
+          { name: post.title, url: `${SITE_URL}/blog/${post.slug}` },
+        ])}
+      />
+
       {/* Reading progress bar */}
       <div className="fixed top-0 left-0 right-0 h-1 bg-border z-50" aria-hidden="true">
         <div id="reading-progress" className="h-full bg-gradient-to-r from-brand-blue to-brand-red w-0 transition-none" />

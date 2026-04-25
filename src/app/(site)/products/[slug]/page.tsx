@@ -7,6 +7,13 @@ import { GradientBlob } from "@/components/effects/GradientBlob";
 import { SectionDivider } from "@/components/effects/SectionDivider";
 import { Accordion } from "@/components/ui/accordion";
 import { products, getProductBySlug } from "@/lib/data/products";
+import { JsonLd } from "@/components/seo/JsonLd";
+import {
+  productSchema,
+  breadcrumbSchema,
+  faqPageSchema,
+  SITE_URL,
+} from "@/lib/seo/schemas";
 
 const productIconMap: Record<string, React.ComponentType<{ className?: string; style?: React.CSSProperties }>> = {
   BookMarked, Heart, BarChart3, Stethoscope, Zap,
@@ -20,9 +27,22 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const { slug } = await params;
   const product = getProductBySlug(slug);
   if (!product) return {};
+  const canonical = `/products/${product.slug}`;
   return {
     title: product.title,
     description: product.description,
+    alternates: { canonical },
+    openGraph: {
+      title: `${product.title} — ${product.tagline}`,
+      description: product.description,
+      url: canonical,
+      type: "website",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `${product.title} — ${product.tagline}`,
+      description: product.description,
+    },
   };
 }
 
@@ -35,6 +55,23 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
 
   return (
     <>
+      {/* Structured data — Product, Breadcrumb, FAQ */}
+      <JsonLd
+        data={productSchema({
+          slug: product.slug,
+          title: product.title,
+          description: product.description,
+        })}
+      />
+      <JsonLd
+        data={breadcrumbSchema([
+          { name: "Home", url: `${SITE_URL}/` },
+          { name: "Products", url: `${SITE_URL}/products` },
+          { name: product.title, url: `${SITE_URL}/products/${product.slug}` },
+        ])}
+      />
+      {product.faqs?.length > 0 && <JsonLd data={faqPageSchema(product.faqs)} />}
+
       {/* Hero */}
       <section className="relative pt-32 pb-20 overflow-hidden" style={{ backgroundColor: product.bgColor }}>
         <GradientBlob color="blue" size="xl" className="-top-32 -right-32" opacity={0.08} />
