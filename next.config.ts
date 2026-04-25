@@ -48,7 +48,7 @@ const nextConfig: NextConfig = {
       },
       // Long-cache the public logo (immutable asset).
       {
-        source: "/anastechlogo.webp",
+        source: "/newlogo.png",
         headers: [
           {
             key: "Cache-Control",

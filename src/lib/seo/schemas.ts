@@ -5,7 +5,7 @@
 
 export const SITE_URL = "https://anastechsolutions.com";
 export const SITE_NAME = "AnasTech Solutions";
-export const SITE_LOGO = `${SITE_URL}/anastechlogo.webp`;
+export const SITE_LOGO = `${SITE_URL}/newlogo.png`;
 
 export const ORG_SAME_AS = [
   // Add real social URLs here when available; keeping the array empty is fine

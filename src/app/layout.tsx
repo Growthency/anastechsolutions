@@ -85,11 +85,11 @@ export const metadata: Metadata = {
   },
   icons: {
     icon: [
-      { url: "/anastechlogo.webp", type: "image/webp" },
+      { url: "/newlogo.png", type: "image/png" },
     ],
-    shortcut: "/anastechlogo.webp",
+    shortcut: "/newlogo.png",
     apple: [
-      { url: "/anastechlogo.webp", type: "image/webp" },
+      { url: "/newlogo.png", type: "image/png" },
     ],
   },
   manifest: "/manifest.webmanifest",

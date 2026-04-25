@@ -16,7 +16,7 @@ const InterlinkChecker = dynamic(() => import('@/components/admin/InterlinkCheck
 
 const CATEGORIES = [
   'Insights', 'Digital Strategy', 'Web Development', 'Mobile Development',
-  'Software', 'SMS Marketing', 'Accounting', 'Business',
+  'Software', 'SMS Marketing', 'Accounting', 'Business', 'Muhius Sunnah',
 ]
 
 const META_TITLE_MAX = 60

@@ -9,12 +9,12 @@ interface LogoProps {
 
 /**
  * AnasTech Solutions brand logo.
- * Uses /public/anastechlogo.webp served via next/image.
+ * Uses /public/newlogo.png served via next/image.
  */
 export function Logo({ size = 36, className, priority = false }: LogoProps) {
   return (
     <Image
-      src="/anastechlogo.webp"
+      src="/newlogo.png"
       alt="AnasTech Solutions"
       width={size}
       height={size}

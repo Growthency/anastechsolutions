@@ -13,9 +13,9 @@ export default function manifest(): MetadataRoute.Manifest {
     orientation: "portrait",
     icons: [
       {
-        src: "/anastechlogo.webp",
+        src: "/newlogo.png",
         sizes: "any",
-        type: "image/webp",
+        type: "image/png",
         purpose: "any",
       },
     ],
