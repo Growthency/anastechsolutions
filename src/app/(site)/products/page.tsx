@@ -11,6 +11,17 @@ export const metadata: Metadata = {
   title: "Our Products",
   description: "Muhius Sunnah, Khdimatul Ummah, eBusiness, Hospital Care, and Bulk SMS Platform — enterprise software products by AnasTech Solutions.",
   alternates: { canonical: "/products" },
+  openGraph: {
+    title: "Our Products | AnasTech Solutions",
+    description: "Muhius Sunnah, Khdimatul Ummah, eBusiness, Hospital Care, and Bulk SMS Platform — enterprise software products by AnasTech Solutions.",
+    url: "/products",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Our Products | AnasTech Solutions",
+    description: "Muhius Sunnah, Khdimatul Ummah, eBusiness, Hospital Care, and Bulk SMS Platform — enterprise software products by AnasTech Solutions.",
+  },
 };
 
 const iconMap: Record<string, React.ComponentType<{ className?: string; style?: React.CSSProperties }>> = {

@@ -9,6 +9,17 @@ export const metadata: Metadata = {
   title: "Contact Us",
   description: "Get in touch with AnasTech Solutions. Chat on WhatsApp, call, or email us. We respond within 1 hour.",
   alternates: { canonical: "/contact" },
+  openGraph: {
+    title: "Contact Us | AnasTech Solutions",
+    description: "Get in touch with AnasTech Solutions. Chat on WhatsApp, call, or email us. We respond within 1 hour.",
+    url: "/contact",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Contact Us | AnasTech Solutions",
+    description: "Get in touch with AnasTech Solutions. Chat on WhatsApp, call, or email us. We respond within 1 hour.",
+  },
 };
 
 const contactCards = [

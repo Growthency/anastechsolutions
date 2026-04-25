@@ -11,6 +11,17 @@ export const metadata: Metadata = {
   title: "Customer Support",
   description: "Get support for AnasTech products — Khdimatul Ummah, eBusiness, Hospital Care, and Bulk SMS Platform. WhatsApp support available 7 days a week.",
   alternates: { canonical: "/support" },
+  openGraph: {
+    title: "Customer Support | AnasTech Solutions",
+    description: "Get support for AnasTech products — Khdimatul Ummah, eBusiness, Hospital Care, and Bulk SMS Platform. WhatsApp support available 7 days a week.",
+    url: "/support",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Customer Support | AnasTech Solutions",
+    description: "Get support for AnasTech products — Khdimatul Ummah, eBusiness, Hospital Care, and Bulk SMS Platform. WhatsApp support available 7 days a week.",
+  },
 };
 
 const productIconMap: Record<string, React.ComponentType<{ className?: string; style?: React.CSSProperties }>> = {

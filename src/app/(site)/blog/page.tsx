@@ -11,6 +11,17 @@ export const metadata: Metadata = {
   title: "Blog & Insights",
   description: "Expert articles on web development, mobile apps, SMS marketing, and business growth from the AnasTech Solutions team.",
   alternates: { canonical: "/blog" },
+  openGraph: {
+    title: "Blog & Insights | AnasTech Solutions",
+    description: "Expert articles on web development, mobile apps, SMS marketing, and business growth from the AnasTech Solutions team.",
+    url: "/blog",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Blog & Insights | AnasTech Solutions",
+    description: "Expert articles on web development, mobile apps, SMS marketing, and business growth from the AnasTech Solutions team.",
+  },
 };
 
 export const revalidate = 60;

@@ -12,6 +12,17 @@ export const metadata: Metadata = {
   title: "About Us",
   description: "Learn about AnasTech Solutions — our story, mission, values, and the team behind Bangladesh's leading digital agency.",
   alternates: { canonical: "/about" },
+  openGraph: {
+    title: "About Us | AnasTech Solutions",
+    description: "Learn about AnasTech Solutions — our story, mission, values, and the team behind Bangladesh's leading digital agency.",
+    url: "/about",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "About Us | AnasTech Solutions",
+    description: "Learn about AnasTech Solutions — our story, mission, values, and the team behind Bangladesh's leading digital agency.",
+  },
 };
 
 const values = [

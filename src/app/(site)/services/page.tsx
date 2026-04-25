@@ -12,6 +12,17 @@ export const metadata: Metadata = {
   title: "Our Services",
   description: "Website development, software, mobile apps, bulk SMS, call center, accounting & business development services by AnasTech Solutions.",
   alternates: { canonical: "/services" },
+  openGraph: {
+    title: "Our Services | AnasTech Solutions",
+    description: "Website development, software, mobile apps, bulk SMS, call center, accounting & business development services by AnasTech Solutions.",
+    url: "/services",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Our Services | AnasTech Solutions",
+    description: "Website development, software, mobile apps, bulk SMS, call center, accounting & business development services by AnasTech Solutions.",
+  },
 };
 
 const iconMap: Record<string, React.ComponentType<{ className?: string; style?: React.CSSProperties }>> = {
