@@ -51,6 +51,7 @@ export default function NewPageEditor() {
   const [isPremium, setIsPremium] = useState(false)
   const [status] = useState<'draft' | 'published'>('draft')
   const [layout, setLayout] = useState<'with-sidebar' | 'full-page'>('with-sidebar')
+  const [showOnBlog, setShowOnBlog] = useState(true)
   const [authorName, setAuthorName] = useState('Anas Tech Solutions')
   const [authorRole, setAuthorRole] = useState('Editorial Team')
   const [metaTitle, setMetaTitle] = useState('')
@@ -141,6 +142,7 @@ export default function NewPageEditor() {
           meta_description: metaDescription.trim(),
           custom_css: customCss.trim() || null,
           custom_schema: customSchema.trim() || null,
+          show_on_blog: showOnBlog,
         }),
       })
 
@@ -418,15 +420,53 @@ export default function NewPageEditor() {
           </div>
 
           <div className="rounded-xl border p-4" style={{ background: cardBg, borderColor: cardBorder }}>
-            <h3 className="text-sm font-semibold mb-3" style={{ color: textPrimary }}>Category</h3>
-            <select
+            <h3 className="text-sm font-semibold mb-1" style={{ color: textPrimary }}>Category</h3>
+            <p className="text-[11px] mb-2" style={{ color: textMuted }}>
+              Type a new category or pick one from the list.
+            </p>
+            <input
+              type="text"
+              list="page-categories"
               value={category}
               onChange={e => setCategory(e.target.value)}
+              placeholder="Type or select a category…"
               className={inputCls}
               style={inputStyle}
-            >
-              {CATEGORIES.map(c => <option key={c} value={c}>{c}</option>)}
-            </select>
+            />
+            <datalist id="page-categories">
+              {CATEGORIES.map(c => <option key={c} value={c} />)}
+            </datalist>
+          </div>
+
+          <div className="rounded-xl border p-4" style={{ background: cardBg, borderColor: cardBorder }}>
+            <h3 className="text-sm font-semibold mb-1" style={{ color: textPrimary }}>Show on Blog</h3>
+            <p className="text-[11px] mb-3" style={{ color: textMuted }}>
+              <strong>Show</strong> — listed on /blog. <strong>Hide</strong> — only reachable via direct URL.
+            </p>
+            <div className="flex gap-2">
+              <button
+                onClick={() => setShowOnBlog(true)}
+                className="flex-1 py-2 rounded-lg text-sm font-medium transition-colors"
+                style={{
+                  background: showOnBlog ? 'rgba(16,185,129,0.15)' : (dark ? '#0f172a' : '#f8fafc'),
+                  color: showOnBlog ? '#10b981' : textMuted,
+                  border: `1px solid ${showOnBlog ? 'rgba(16,185,129,0.3)' : (dark ? '#1e293b' : '#e2e8f0')}`,
+                }}
+              >
+                Show
+              </button>
+              <button
+                onClick={() => setShowOnBlog(false)}
+                className="flex-1 py-2 rounded-lg text-sm font-medium transition-colors"
+                style={{
+                  background: !showOnBlog ? 'rgba(100,116,139,0.15)' : (dark ? '#0f172a' : '#f8fafc'),
+                  color: !showOnBlog ? (dark ? '#cbd5e1' : '#334155') : textMuted,
+                  border: `1px solid ${!showOnBlog ? (dark ? 'rgba(100,116,139,0.3)' : '#cbd5e1') : (dark ? '#1e293b' : '#e2e8f0')}`,
+                }}
+              >
+                Hide
+              </button>
+            </div>
           </div>
 
           <div className="rounded-xl border p-4" style={{ background: cardBg, borderColor: cardBorder }}>

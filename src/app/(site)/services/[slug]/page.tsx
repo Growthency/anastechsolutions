@@ -207,6 +207,71 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
         </div>
       </section>
 
+      {/* Packages — only renders when service has pricing tiers defined */}
+      {service.packages && service.packages.length > 0 && (
+        <section className="section-pad bg-paper">
+          <div className="max-w-7xl mx-auto px-6 lg:px-8">
+            <ScrollReveal className="text-center mb-12">
+              <h2 className="font-display text-4xl font-bold text-ink mb-3">Pricing Packages</h2>
+              <p className="text-ink-soft">Choose the package that fits your business — clear pricing, no hidden costs.</p>
+            </ScrollReveal>
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto items-stretch">
+              {service.packages.map((pkg, i) => (
+                <ScrollReveal key={pkg.name} delay={i * 0.08}>
+                  <div
+                    className={`relative h-full flex flex-col rounded-2xl p-7 border-2 transition-all hover:-translate-y-1 ${
+                      pkg.highlight ? "shadow-xl" : "shadow-card"
+                    }`}
+                    style={{
+                      backgroundColor: pkg.highlight ? service.bgColor : "#FFFFFF",
+                      borderColor: pkg.highlight ? service.color : "#E5E7EB",
+                    }}
+                  >
+                    {pkg.highlight && (
+                      <span
+                        className="absolute -top-3 left-1/2 -translate-x-1/2 text-[10px] font-bold uppercase tracking-widest px-3 py-1 rounded-full text-white shadow-md"
+                        style={{ backgroundColor: service.color }}
+                      >
+                        Most Popular
+                      </span>
+                    )}
+                    <h3 className="font-display text-2xl font-bold text-ink mb-1">{pkg.name}</h3>
+                    <p className="text-ink-soft text-sm mb-5">{pkg.description}</p>
+                    <div className="flex items-baseline gap-2 mb-6 pb-6 border-b border-border">
+                      <span className="font-display text-4xl font-bold" style={{ color: service.color }}>
+                        {pkg.price}
+                      </span>
+                      {pkg.priceNote && (
+                        <span className="text-ink-muted text-xs font-medium">{pkg.priceNote}</span>
+                      )}
+                    </div>
+                    <ul className="space-y-2.5 mb-7 flex-1">
+                      {pkg.features.map((f) => (
+                        <li key={f} className="flex items-start gap-2.5 text-ink-soft text-sm">
+                          <CheckCircle2 className="size-4 shrink-0 mt-0.5" style={{ color: service.color }} />
+                          <span>{f}</span>
+                        </li>
+                      ))}
+                    </ul>
+                    <Link
+                      href={pkg.ctaHref ?? "/contact"}
+                      className={`inline-flex items-center justify-center gap-2 px-6 py-3 rounded-button font-bold transition-all hover:-translate-y-0.5 ${
+                        pkg.highlight ? "text-white shadow-lg" : "border-2"
+                      }`}
+                      style={pkg.highlight
+                        ? { backgroundColor: service.color }
+                        : { borderColor: service.color, color: service.color }}
+                    >
+                      {pkg.ctaLabel ?? "Contact Now"} <MessageCircle className="size-4" />
+                    </Link>
+                  </div>
+                </ScrollReveal>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
+
       {/* Deliverables */}
       <section className="section-pad bg-paper-2">
         <div className="max-w-7xl mx-auto px-6 lg:px-8">

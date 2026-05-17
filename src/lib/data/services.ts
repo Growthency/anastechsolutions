@@ -1,5 +1,16 @@
 import { waLink } from "@/lib/utils";
 
+export interface ServicePackage {
+  name: string;          // "Frontend Website"
+  price: string;         // "৳25,000"
+  priceNote?: string;    // e.g. "one-time" or "starting at"
+  description: string;   // short tagline below name
+  features: string[];    // bullet list of what's included
+  highlight?: boolean;   // featured / recommended badge
+  ctaLabel?: string;     // CTA button text (default: "Contact Now")
+  ctaHref?: string;      // CTA destination (default: "/contact")
+}
+
 export interface Service {
   slug: string;
   title: string;
@@ -16,6 +27,7 @@ export interface Service {
   whatsappMessage: string;
   color: string;
   bgColor: string;
+  packages?: ServicePackage[];
 }
 
 export const services: Service[] = [
@@ -63,6 +75,61 @@ export const services: Service[] = [
       { q: "Do you redesign existing websites?", a: "Absolutely. We can redesign and migrate your existing website while preserving your SEO rankings." },
     ],
     whatsappMessage: waLink("Hi AnasTech, I'm interested in Website Development. Can we discuss?"),
+    packages: [
+      {
+        name: "Frontend Website",
+        price: "৳25,000",
+        priceNote: "one-time",
+        description: "A polished, mobile-first marketing site.",
+        features: [
+          "Up to 5 pages (Home, About, Services, Blog, Contact)",
+          "Mobile-first responsive design",
+          "Modern Next.js / React frontend",
+          "Contact form with email notifications",
+          "Basic on-page SEO setup",
+          "1 month free support",
+        ],
+        ctaLabel: "Contact Now",
+        ctaHref: "/contact",
+      },
+      {
+        name: "Backend Website",
+        price: "৳50,000",
+        priceNote: "one-time",
+        description: "Dynamic site with admin panel & database.",
+        features: [
+          "Everything in Frontend Website",
+          "Custom admin dashboard",
+          "Database integration (PostgreSQL / MySQL)",
+          "User authentication & role management",
+          "REST / API endpoints for your data",
+          "Image upload & media management",
+          "Advanced SEO + sitemap + structured data",
+          "2 months free support",
+        ],
+        highlight: true,
+        ctaLabel: "Contact Now",
+        ctaHref: "/contact",
+      },
+      {
+        name: "Full Stack + Mobile App",
+        price: "৳1,00,000",
+        priceNote: "one-time",
+        description: "Complete web platform with companion mobile app.",
+        features: [
+          "Everything in Backend Website",
+          "Simple mobile app (Android + iOS)",
+          "Shared backend API between web & app",
+          "Push notifications support",
+          "Payment gateway integration (bKash / SSLCommerz / Stripe)",
+          "App store / Play Store deployment",
+          "Analytics dashboard",
+          "3 months free support + priority WhatsApp line",
+        ],
+        ctaLabel: "Contact Now",
+        ctaHref: "/contact",
+      },
+    ],
   },
   {
     slug: "software-development",

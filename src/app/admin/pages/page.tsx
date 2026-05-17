@@ -201,7 +201,7 @@ export default function AdminPagesPage() {
                   <td className="px-5 py-3.5">
                     <div className="flex items-center justify-end gap-1">
                       <a
-                        href={`https://anastechsolutions.com${post.slug}`}
+                        href={`/blog/${post.slug.replace(/^\/+/, '')}`}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="p-2 rounded-lg transition-colors"

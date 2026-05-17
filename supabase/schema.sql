@@ -25,6 +25,7 @@ create table public.blog_posts (
   layout           text default 'with-sidebar',    -- with-sidebar | full-page
   custom_css       text,
   custom_schema    text,
+  show_on_blog     boolean default true,           -- false = hide from /blog listing
   created_at       timestamptz default now(),
   updated_at       timestamptz default now(),
   published_at     timestamptz

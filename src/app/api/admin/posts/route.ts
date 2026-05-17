@@ -77,7 +77,7 @@ export async function POST(req: NextRequest) {
     title, slug, content, featured_image,
     category, is_premium, status,
     author_name, author_role, custom_css, custom_schema,
-    meta_title, meta_description, layout,
+    meta_title, meta_description, layout, show_on_blog,
   } = body
 
   if (!title || !slug) {
@@ -105,6 +105,7 @@ export async function POST(req: NextRequest) {
       layout: layout || 'with-sidebar',
       custom_css: custom_css || null,
       custom_schema: custom_schema || null,
+      show_on_blog: show_on_blog ?? true,
     })
     .select()
     .single()
